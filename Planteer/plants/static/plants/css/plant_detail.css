@@ -1,0 +1,112 @@
+.detail-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 40px;
+}
+
+.detail-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--offwhite);
+}
+
+.detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 8px;
+}
+
+.detail-name {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--black);
+}
+
+.detail-category {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-top: -12px;
+}
+
+.detail-about {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+}
+
+.detail-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.detail-field-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.detail-field-value {
+    font-size: 0.9rem;
+    color: var(--black);
+    line-height: 1.55;
+}
+
+.detail-actions {
+    display: flex;
+    gap: 12px;
+    padding-top: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-edit, .btn-delete {
+    padding: 10px 24px;
+    border-radius: 7px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-edit {
+    background: var(--black);
+    color: var(--white);
+    border: 1.5px solid var(--black);
+}
+
+.btn-edit:hover { background: #333; border-color: #333; color: var(--white); }
+
+.btn-delete {
+    background: transparent;
+    color: #c0392b;
+    border: 1.5px solid #c0392b;
+}
+
+.btn-delete:hover { background: #c0392b; color: var(--white); }
+
+.related-section h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+}
+
+@media (max-width: 767px) {
+    .detail-page { padding: 32px 16px; }
+    .detail-name { font-size: 1.8rem; }
+}

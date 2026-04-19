@@ -1,0 +1,61 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'plants/css/plant_search.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="search-page">
+
+    <div class="search-bar-wrap">
+        <h1>Search Plants</h1>
+        <form class="search-bar" method="GET" action="{% url 'plants:plant_search_view' %}">
+            <input type="text" name="q" value="{{ query }}" placeholder="Search For Plant...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    {% if query %}
+        <p class="results-meta">
+            {% if results %}
+                <strong>{{ results|length }}</strong> result{{ results|length|pluralize }} for "<strong>{{ query }}</strong>"
+            {% else %}
+                No results for "<strong>{{ query }}</strong>"
+            {% endif %}
+        </p>
+
+        {% if results %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+            {% for plant in results %}
+            <div class="col">
+                <a class="plant-card" href="{% url 'plants:plant_detail_view' plant_id=plant.id %}">
+                    <div class="plant-card-img">
+                        {% if plant.image %}
+                            <img src="{{ plant.image.url }}" alt="{{ plant.name }}">
+                        {% endif %}
+                    </div>
+                    <h3>{{ plant.name }}</h3>
+                    <p class="card-about">{{ plant.about|truncatewords:6 }}</p>
+                    <p class="card-category">{{ plant.get_category_display }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="search-state">
+            <p>No plants matched your search.</p>
+            <p class="hint">Try a different name, category, or keyword.</p>
+        </div>
+        {% endif %}
+
+    {% else %}
+    <div class="search-state">
+        <p>Start typing to search the plant database.</p>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

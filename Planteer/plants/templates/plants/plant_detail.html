@@ -1,0 +1,69 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'plants/css/plant_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="detail-page">
+
+    <div class="row g-5 align-items-start mb-5 detail-top">
+        <div class="col-12 col-md-6">
+            <div class="detail-image">
+                {% if plant.image %}
+                    <img src="{{ plant.image.url }}" alt="{{ plant.name }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="detail-info">
+                <h1 class="detail-name">{{ plant.name }}</h1>
+                <p class="detail-category">{{ plant.get_category_display }}</p>
+                <p class="detail-about">{{ plant.about }}</p>
+
+                <div class="detail-field">
+                    <span class="detail-field-label">Is Edible:</span>
+                    <span class="detail-field-value">{% if plant.is_edible %}Yes{% else %}No{% endif %}</span>
+                </div>
+
+                <div class="detail-field">
+                    <span class="detail-field-label">Used For:</span>
+                    <span class="detail-field-value">{{ plant.used_for }}</span>
+                </div>
+
+                <div class="detail-actions">
+                    <a class="btn-edit" href="{% url 'plants:plant_update_view' plant_id=plant.id %}">Edit Plant</a>
+                    <a class="btn-delete" href="{% url 'plants:plant_delete_view' plant_id=plant.id %}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if related %}
+    <div class="related-section">
+        <h2>Related Plants</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+            {% for p in related %}
+            <div class="col">
+                <a class="plant-card" href="{% url 'plants:plant_detail_view' plant_id=p.id %}">
+                    <div class="plant-card-img">
+                        {% if p.image %}
+                            <img src="{{ p.image.url }}" alt="{{ p.name }}">
+                        {% endif %}
+                    </div>
+                    <h3>{{ p.name }}</h3>
+                    <p class="card-about">{{ p.about|truncatewords:6 }}</p>
+                    <p class="card-category">{{ p.get_category_display }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

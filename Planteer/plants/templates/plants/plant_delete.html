@@ -1,0 +1,27 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'plants/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+    <a class="back-link" href="{% url 'plants:plant_detail_view' plant_id=plant.id %}">← Back to details</a>
+
+    <div class="delete-card">
+        <h1>Delete "{{ plant.name }}"?</h1>
+        <p>This will permanently remove the plant from the database. This action cannot be undone.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button class="btn-danger" type="submit">Yes, Delete</button>
+                <a class="btn-secondary" href="{% url 'plants:plant_detail_view' plant_id=plant.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

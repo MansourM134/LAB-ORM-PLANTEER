@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planteer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-md">
+        <div class="container-fluid nav-container">
+            <a class="navbar-brand brand" href="{% url 'main:home_view' %}">Planteer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-md-center gap-md-4">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'plants:plants_view' %}">All Plants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item mt-2 mt-md-0"><a class="btn-nav" href="{% url 'plants:add_plants_view' %}">Add Plant</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <div class="row g-4">
+            <div class="col-12 col-md-4 footer-brand">
+                <span class="footer-brand-name">Planteer</span>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="YouTube">▶</a>
+                    <a href="#" aria-label="Instagram">◉</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="row footer-links">
+                    <div class="col-6 footer-col">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="{% url 'plants:plants_view' %}">All Plants</a></li>
+                            <li><a href="{% url 'plants:add_plants_view' %}">Add a Plant</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 footer-col">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="#">Herbs</a></li>
+                            <li><a href="#">Trees</a></li>
+                            <li><a href="#">Flowers</a></li>
+                            <li><a href="#">Vegetables</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">© 2026 Planteer. All rights reserved.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

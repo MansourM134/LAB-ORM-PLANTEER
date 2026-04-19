@@ -1,0 +1,123 @@
+.hero {
+    position: relative;
+    min-height: 420px;
+    background: url("/static/main/images/hero_bg2.webp") center / cover no-repeat;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 80px 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 580px;
+}
+
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--black);
+}
+
+.hero-sub {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #444;
+    letter-spacing: 0.01em;
+}
+
+.hero-search {
+    display: flex;
+    max-width: 500px;
+    border: 1.5px solid var(--black);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.hero-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 18px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    background: transparent;
+    color: var(--black);
+}
+
+.hero-search input::placeholder { color: #aaa; }
+
+.hero-search button {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 14px 24px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+}
+
+.hero-search button:hover { background: #333; }
+
+.section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 40px;
+}
+
+.section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.section-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.section-more {
+    font-size: 0.875rem;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s;
+}
+
+.section-more:hover { gap: 8px; }
+
+.section-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 36px;
+}
+
+.plant-card .card-category { color: var(--accent); font-weight: 600; letter-spacing: 0.04em; }
+
+.plant-card-img { border-radius: 12px; }
+
+@media (max-width: 767px) {
+    .hero { min-height: 300px; }
+    .hero-content { padding: 48px 20px; max-width: 100%; }
+    .hero-search { max-width: 100%; }
+    .section { padding: 40px 20px; }
+    .section-header h2 { font-size: 1.5rem; }
+}

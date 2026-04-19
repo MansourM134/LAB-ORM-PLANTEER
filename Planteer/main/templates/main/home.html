@@ -1,0 +1,54 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Planteer</h1>
+        <p class="hero-sub">Plant Database For Plants Lovers</p>
+        <form class="hero-search" method="GET" action="{% url 'plants:plant_search_view' %}">
+            <input type="text" name="q" placeholder="Search For Plant...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</section>
+
+<div class="section">
+    <div class="section-header">
+        <h2>Plants</h2>
+        <a class="section-more" href="{% url 'plants:plants_view' %}">More →</a>
+    </div>
+    <p class="section-desc">Learn more about plants</p>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+        {% for plant in latest_plants %}
+        <div class="col">
+            <a class="plant-card" href="{% url 'plants:plant_detail_view' plant_id=plant.id %}">
+                <div class="plant-card-img">
+                    {% if plant.image %}
+                        <img src="{{ plant.image.url }}" alt="{{ plant.name }}">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt="Plant">
+                    {% endif %}
+                </div>
+                <h3>{{ plant.name }}</h3>
+                <p class="card-about">{{ plant.about|truncatewords:6 }}</p>
+                <p class="card-category">{{ plant.get_category_display }}</p>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="empty-state">
+                <p>No plants yet. <a href="{% url 'plants:add_plants_view' %}">Add the first one →</a></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
