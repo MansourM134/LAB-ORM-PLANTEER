@@ -106,7 +106,114 @@
     margin-bottom: 28px;
 }
 
+.comment-form-section {
+    padding: 40px 0 32px;
+}
+
+.comment-form-section .form-page-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    margin-bottom: 28px;
+}
+
+.comment-form-section .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+    max-width: 640px;
+}
+
+.comment-form-section .form-group label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--black);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.comment-form-section .form-group input,
+.comment-form-section .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--black);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.comment-form-section .form-group input::placeholder,
+.comment-form-section .form-group textarea::placeholder {
+    color: #aaa;
+}
+
+.comment-form-section .form-group input:focus,
+.comment-form-section .form-group textarea:focus {
+    border-color: var(--black);
+}
+
+.comment-form-section .form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.6;
+}
+
+.comments-section {
+    padding: 32px 0 40px;
+}
+
+.comments-section h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    margin-bottom: 28px;
+}
+
+.comment-card {
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    background: var(--white);
+    max-width: 740px;
+}
+
+.comment-card h4 {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 6px;
+}
+
+.comment-card p {
+    font-size: 0.9rem;
+    color: var(--black);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.comment-card h6 {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin: 0;
+}
+
 @media (max-width: 767px) {
     .detail-page { padding: 32px 16px; }
     .detail-name { font-size: 1.8rem; }
+    .comment-form-section .form-page-title,
+    .comments-section h2 { font-size: 1.3rem; }
+    .comment-card { padding: 16px; }
 }

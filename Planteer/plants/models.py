@@ -20,3 +20,18 @@ class Plant(models.Model):
     category = models.CharField(choices=CategoryChoices.choices)
     is_edible = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Comment(models.Model):
+
+    plant_id = models.ForeignKey(Plant, on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=2048)
+    content = models.TextField()
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} on {self.plant_id.name}"

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from .forms import PlantForm
-from .models import Plant
+from .models import Plant, Comment
 
 
 def plants_view(request: HttpRequest):
@@ -37,8 +37,18 @@ def add_plants_view(request: HttpRequest):
 def plant_detail_view(request: HttpRequest, plant_id: int):
     plant = get_object_or_404(Plant, id=plant_id)
     related = Plant.objects.filter(category=plant.category).exclude(id=plant.id)[:3]
-    return render(request, "plants/plant_detail.html", {"plant": plant, "related": related})
+    comments = Comment.objects.filter(plant_id=plant)
+    return render(request, "plants/plant_detail.html", {"plant": plant, "related": related, "comments":comments})
 
+
+def plant_comment_view(request: HttpRequest, plant_id: int):
+
+    if request.method == "POST":
+        plant = Plant.objects.get(pk=plant_id)
+        new_comment = Comment(plant_id=plant,name=request.POST["name"],content=request.POST["content"],)
+        new_comment.save()
+
+    return redirect("plants:plant_detail_view", plant_id=plant_id)
 
 def plant_update_view(request: HttpRequest, plant_id: int):
     plant = get_object_or_404(Plant, id=plant_id)
