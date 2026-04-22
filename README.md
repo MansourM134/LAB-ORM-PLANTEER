@@ -31,3 +31,38 @@
 
 ## UML for the model `Plant` &  `Contact` Model 
 <img width="618" style="width:100%; height:auto;" alt="Screenshot 2024-03-19 at 3 16 01 PM" src="assets/uml.png">
+
+
+## Using what you learned, Create a new model called "Comments", connect the "Plant" with the "Comment" using one to many relation:
+Comment model will include:
+- relation to Plant model
+- name
+- content
+- date
+
+# Notes
+- use the right fields to each attribute
+- allow the user to add a comment on a plant
+- display all the comments related to a plant in the plant's page
+
+# We want to add the countries that the plant is native to. 
+For example palm tree is native to :
+Saudi Arabia, Iraq, Kuwait, etc.
+
+
+1. To do this you will need a new Model and a relation on the Plant model.
+
+Model Country:
+- name (Varcher)
+- flag  (Image)
+
+Model Plant:
+- …
+- …
+- countries : relationship of type manyToMany with Country
+
+
+2. We need to be able to filter by country, for example I want to be able to list all native plants to Saudi Arabia in the all plants page.
+
+3. (Bonus): I want to be able in the detail page to click on a country, and then it displays a page with all plants native to that country.
+4. (Bonus): Use include to unify the plant card across the website.
