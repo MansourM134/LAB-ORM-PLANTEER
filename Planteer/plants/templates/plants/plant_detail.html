@@ -34,6 +34,21 @@
                     <span class="detail-field-value">{{ plant.used_for }}</span>
                 </div>
 
+                <div class="detail-field">
+                    <span class="detail-field-label">Native to:</span>
+                        <span class="detail-field-value">
+                            {% for country in plant.countries.all %}
+                            <span class="country-icon">
+                                <a href="{% url 'plants:plants_view' %}?country={{ country.id }}">
+                                    <img src="{{ country.flag.url }}" alt="{{ country.name }}">
+                                    <span>{{ country.name }}</span>
+                                </a>
+                            </span>
+                            
+                            {% endfor %}
+                        </span>
+                </div>
+
                 <div class="detail-actions">
                     <a class="btn-edit" href="{% url 'plants:plant_update_view' plant_id=plant.id %}">Edit Plant</a>
                     <a class="btn-delete" href="{% url 'plants:plant_delete_view' plant_id=plant.id %}">Delete</a>
@@ -42,7 +57,7 @@
         </div>
     </div>
 <hr>
-    <div class="comment-form-section">
+    <!-- <div class="comment-form-section">
         <h2 class="form-page-title">Add a Comment</h2>
         <form action="{% url 'plants:plant_comment_view' plant_id=plant.id %}" method="POST">
             {% csrf_token %}
@@ -57,6 +72,31 @@
             </div>
             <input type="submit" value="Add comment" class="btn btn-primary">
 
+        </form>
+    </div> -->
+
+    <div class="comment-form-section">
+        <h2 class="form-page-title">Add a Comment</h2>
+        <form action="{% url 'plants:plant_comment_view' plant_id=plant.id %}" method="POST" novalidate>
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <span class="field-error">{{ form.name.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Comment</label>
+                {{ form.content }}
+                {% if form.content.errors %}
+                    <span class="field-error">{{ form.content.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Comment</button>
         </form>
     </div>
 <hr>
@@ -78,16 +118,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             {% for p in related %}
             <div class="col">
-                <a class="plant-card" href="{% url 'plants:plant_detail_view' plant_id=p.id %}">
-                    <div class="plant-card-img">
-                        {% if p.image %}
-                            <img src="{{ p.image.url }}" alt="{{ p.name }}">
-                        {% endif %}
-                    </div>
-                    <h3>{{ p.name }}</h3>
-                    <p class="card-about">{{ p.about|truncatewords:6 }}</p>
-                    <p class="card-category">{{ p.get_category_display }}</p>
-                </a>
+                {% include "plants/includes/plant_card.html" with plant=p %}
             </div>
             {% endfor %}
         </div>

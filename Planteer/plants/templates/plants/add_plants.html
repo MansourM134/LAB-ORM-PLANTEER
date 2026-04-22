@@ -46,6 +46,18 @@
                 {{ form.is_edible }}
                 <label for="{{ form.is_edible.id_for_label }}">Edible</label>
             </div>
+            <!-- <div>
+                {% for country in countries %}
+                    <div class="country-icon">
+                        <label><img src="{{country.flag.url}}" alt="">{{ country.name }}</label>
+                        <input type="checkbox" class="form-check-input" name="countries" id="check-{{country.id}}" value="{{country.id}}">
+                    </div>
+                {% endfor %}
+            </div> -->
+            <div class="form-group">
+                <label>Native Countries</label>
+                {{ form.countries }}
+            </div>
 
             <div class="form-actions">
                 <button class="btn-primary" type="submit">Save Plant</button>
