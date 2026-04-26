@@ -10,7 +10,7 @@ class PlantAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
 
-    list_display = ("name", "plant_id", "added_at")
+    list_display = ("user", "plant_id", "added_at")
     list_filter = ("plant_id",)
 
 class CountryAdmin(admin.ModelAdmin):

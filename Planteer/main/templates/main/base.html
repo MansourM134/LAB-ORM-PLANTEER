@@ -24,7 +24,19 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto align-items-md-center gap-md-4">
                     <li class="nav-item"><a class="nav-link" href="{% url 'plants:plants_view' %}">All Plants</a></li>
+
+                    {% if request.user.is_staff %}
                     <li class="nav-item mt-2 mt-md-0"><a class="btn-nav" href="{% url 'plants:add_plants_view' %}">Add Plant</a></li>
+                    {% endif %}
+
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item nav-user">{{ request.user.first_name }}</li>
+                        <li class="nav-item"><a class="nav-link nav-logout" href="{% url 'accounts:log_out' %}?next={{request.path}}">Log Out</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'accounts:sign_up' %}">Sign Up</a></li>
+                        <li class="nav-item mt-2 mt-md-0"><a class="btn-nav" href="{% url 'accounts:sign_in' %}?next={{request.path}}">Sign In</a></li>
+                    {% endif %}
+                
                 </ul>
             </div>
         </div>

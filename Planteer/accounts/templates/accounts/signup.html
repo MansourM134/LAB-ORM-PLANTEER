@@ -1,0 +1,58 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'plants/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+    <a class="back-link" href="{% url 'main:home_view' %}">← Back to home</a>
+
+    <div class="form-page-inner">
+        <h1 class="form-page-title">Create an account</h1>
+        <p class="form-page-subtitle">Join Planteer and start exploring the plant database.</p>
+
+        <form action="{% url 'accounts:sign_up' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="example@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Your username">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" id="first_name" placeholder="First name">
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" placeholder="Last name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Create a password">
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-primary" type="submit">Sign Up</button>
+            </div>
+
+            <p class="form-alt-link">Already have an account? <a href="{% url 'accounts:sign_in' %}">Sign in</a></p>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

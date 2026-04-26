@@ -66,3 +66,9 @@ Model Plant:
 
 3. (Bonus): I want to be able in the detail page to click on a country, and then it displays a page with all plants native to that country.
 4. (Bonus): Use include to unify the plant card across the website.
+
+# LAB for Django Authentication:
+- Add the feature of registering new users and logging in to the Planteer project.
+- Link the comments that are added to users.
+- Restrict the ability to add, update, and delete plants to the Admin only.
+- Only registered users can add comments on a plant; otherwise, show a message prompting unregistered users to sign up in order to add a comment.

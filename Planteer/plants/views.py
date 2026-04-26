@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from .forms import PlantForm, CommentForm
 from .models import Plant, Comment, Country
+from django.contrib import messages
+
 
 
 def plants_view(request: HttpRequest):
@@ -28,6 +30,11 @@ def plants_view(request: HttpRequest):
 
 
 def add_plants_view(request: HttpRequest):
+
+    if not request.user.is_staff:
+        # messages.success(request, "onlt staff can add plants","alert-warning")
+        return redirect('main:home_view')
+
     form = PlantForm()
 
     if request.method == "POST":
@@ -49,23 +56,38 @@ def plant_detail_view(request: HttpRequest, plant_id: int):
 
 
 def plant_comment_view(request: HttpRequest, plant_id: int):
+
+    if not request.user.is_authenticated:
+        # messages.error(request, "Only registered users can add comments", "alert-danger")
+        return redirect("accounts:sign_in")
+        
+        
     plant = get_object_or_404(Plant, id=plant_id)
+    related = Plant.objects.filter(category=plant.category).exclude(id=plant.id)[:3]
+    comments = plant.comment_set.all().order_by("-added_at")
 
     if request.method == "POST":
         form = CommentForm(request.POST)
+
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.plant_id = plant_id
+            comment.user = request.user
+            comment.plant = plant 
             comment.save()
             return redirect("plants:plant_detail_view", plant_id=plant_id)
-        related  = Plant.objects.filter(category=plant.category).exclude(id=plant.id)[:3]
-        comments = plant.comments.all().order_by("-added_at")
-        return render(request, "plants/plant_detail.html", {"plant":plant,"related":related,"comments":comments,"form":form,})
-    
-    return redirect("plants:plant_detail_view", plant_id=plant_id)
+    else:
+        form = CommentForm()
+
+    return render(request, "plants/plant_detail.html", {"plant": plant,"related": related,"comments": comments,"form": form,})
 
 
 def plant_update_view(request: HttpRequest, plant_id: int):
+
+    if not request.user.is_staff:
+        # messages.success(request, "onlt staff can update plants","alert-warning")
+        return redirect('main:home_view')
+
+
     plant = get_object_or_404(Plant, id=plant_id)
     plant_form = PlantForm(instance=plant)
 
@@ -81,6 +103,11 @@ def plant_update_view(request: HttpRequest, plant_id: int):
 
 
 def plant_delete_view(request: HttpRequest, plant_id: int):
+
+    if not request.user.is_staff:
+        # messages.success(request, "onlt staff can remove plants","alert-warning")
+        return redirect('main:home_view')
+
     plant = get_object_or_404(Plant, id=plant_id)
 
     if request.method == "POST":

@@ -50,6 +50,8 @@
 }
 
 .form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
 .form-group input[type="file"],
 .form-group textarea,
 .form-group select {
@@ -67,6 +69,8 @@
 }
 
 .form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
 .form-group textarea:focus,
 .form-group select:focus { border-color: var(--black); }
 
@@ -203,4 +207,30 @@
     align-items: center;
     gap: 5px;
     margin: 0;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-alt-link {
+    margin-top: 24px;
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+.form-alt-link a {
+    color: var(--black);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.2s;
+}
+
+.form-alt-link a:hover { border-color: var(--black); }
+
+@media (max-width: 480px) {
+    .form-row { grid-template-columns: 1fr; gap: 0; }
 }

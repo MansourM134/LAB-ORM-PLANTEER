@@ -23,11 +23,11 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model  = Comment
         fields = [
-            "name", 
+            # "name", 
             "content"
             ]
         
         widgets = {
-            "name":    forms.TextInput(attrs={"placeholder": "Your name", "minlength": "3"}),
+            # "name":    forms.TextInput(attrs={"placeholder": "Your name", "minlength": "3"}),
             "content": forms.Textarea(attrs={"placeholder": "Add your comment here…", "minlength": "3", "rows": 4}),
         }

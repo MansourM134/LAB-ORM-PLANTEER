@@ -89,6 +89,20 @@ header {
 
 .btn-nav:hover { background: #333; color: var(--white) !important; }
 
+.nav-user {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--black);
+    padding: 10px 0;
+}
+
+.nav-logout {
+    opacity: 0.45;
+    font-size: 0.82rem !important;
+}
+
+.nav-logout:hover { opacity: 1 !important; }
+
 main { flex: 1; }
 
 footer {

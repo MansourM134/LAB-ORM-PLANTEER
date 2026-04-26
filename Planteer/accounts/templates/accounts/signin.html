@@ -1,0 +1,42 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'plants/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+    <a class="back-link" href="{% url 'main:home_view' %}">← Back to home</a>
+
+    <div class="form-page-inner">
+        <h1 class="form-page-title">Welcome back</h1>
+        <p class="form-page-subtitle">Sign in to your Planteer account.</p>
+
+        <form action="{% url 'accounts:sign_in' %}{% if 'next' in request.GET %}?next={{request.GET.next}}{% endif %}" method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Your username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Your password">
+            </div>
+
+            <div class="form-actions">
+                <button class="btn-primary" type="submit">Sign In</button>
+            </div>
+
+            <p class="form-alt-link">Don't have an account? <a href="{% url 'accounts:sign_up' %}">Sign up</a></p>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}
